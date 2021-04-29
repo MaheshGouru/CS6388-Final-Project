@@ -26,14 +26,34 @@ Then, run `webgme start` from the project root to start . Finally, navigate to `
       -Uncompress: tar xvzf zookeeper-'version'.tar.gz
 - Kazoo: pip install python3 Kazoo
 
-
 ## Before running the scripts
 
-- Start the ZooKeeper server
-```
-sudo bin/zkServer.sh start
-```
+## Start the WebGME Server
 
+To build and launch (first time):
+```bash
+$ docker-compose up -d
+```
+To create new images (--no-cache) to force building from scratch:
+```bash
+$ docker-compose build
+```
+To launch again (leave out -d for non daemon launch):
+```bash
+$ docker-compose up -d
+```
+Short command for rebuilding and restarting
+```bash
+$ docker-compose up -d --build
+```
+To stop containers:
+```bash
+$ docker-compose stop
+```
+To clean up containers/images/networks:
+```bash
+$ docker system prune
+```
 
 ## Mininet Emulation
 Assign the various hosts as either publisher or subscriber. 
@@ -49,41 +69,3 @@ mininet> h2 python3 ./middleware/subscriber.py AAPL True &
 mininet> h3 python3 ./middleware/listener.py True &
 mininet> h4 python3 ./middleware/publisher.py 1 AAPL True &
 ```
-
-### Complex Broker Approach
-```bash
-sudo mn -c #For cleaning up the environment
-sudo mn --topo single,8 -x
-mininet> h1 python3 ./middleware/broker.py &
-mininet> h2 python3 ./middleware/subscriber.py AAPL True &
-mininet> h3 python3 ./middleware/subscriber.py MSFT True &
-mininet> h4 python3 ./middleware/subscriber.py NFLX True &
-mininet> h5 python3 ./middleware/publisher.py 5 AAPL True &
-mininet> h6 python3 ./middleware/publisher.py 6 MSFT True &
-mininet> h7 python3 ./middleware/publisher.py 7 NFLX True &
-mininet> h8 python3 ./middleware/listener.py True &
-```
-
-### Simple Flood Approach
-```bash
-sudo mn -c #For cleaning up the environment
-sudo mn --topo single,4 -x
-mininet> h1
-mininet> h2 python3 ./middleware/subscriber.py AAPL False &
-mininet> h3 python3 ./middleware/listener.py False &
-mininet> h4 python3 ./middleware/publisher.py 4 AAPL False &
-```
-
-### Complex Flood Approach
-```bash
-sudo mn -c #For cleaning up the environment
-sudo mn --topo single,8 -x
-mininet> h1 python3 ./middleware/subscriber.py AAPL False &
-mininet> h2 python3 ./middleware/subscriber.py MSFT False &
-mininet> h3 python3 ./middleware/subscriber.py NFLX False &
-mininet> h4 python3 ./middleware/publisher.py 4 AAPL False &
-mininet> h5 python3 ./middleware/publisher.py 5 MSFT False &
-mininet> h6 python3 ./middleware/publisher.py 6 NFLX False &
-mininet> h7 python3 ./middleware/listener.py False &
-```
-
