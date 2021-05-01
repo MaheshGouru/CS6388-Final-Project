@@ -1,10 +1,7 @@
 # CS6381 Mini-Project
 
 ## Overview
-In this assignment we will build upon the PUB/SUB middleware from Assignment 2. 
-We support ownership strength for fidelity in publishing and acquisition of recent events through message buffers. 
-With ownership strength, information from only the highest ownership strength publisher gets relayed to the subscriber. 
-As for the the history quality of service, we will require that last N samples of information published on a topic be preserved in a sliding window fashion.
+In this assignment we will a Petri Net for Mass-Spring-Dampers. Petri Nets are a formal, graphical, executable technique for the specification and analysis of concurrent, discrete-event dynamic systems.
 
 | Simple Broker Latency                                                                                                    | Complex Broker Latency                                                                                                     | Simple Flooding Latency                                                                                                      | Complex Flooding Latency                                                                                                       |
 |--------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
